@@ -38,6 +38,6 @@ struct BackgroundCircles: View {
     ZStack{
         Color(.colorBlue).ignoresSafeArea()
         
-        BackgroundCircles(imageName: "character-1", circlesColor: .indigo)
+        BackgroundCircles(imageName: "character-1", circlesColor: .colorGray)
     }
 }

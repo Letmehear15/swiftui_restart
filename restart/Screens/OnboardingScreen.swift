@@ -10,6 +10,12 @@ import SwiftUI
 struct OnBoardingScreen: View {
     @AppStorage(EAppStorageName.ShowingScreen.rawValue) var showingScreen: EScreens = .OnboardingScreen
     
+    @State private var buttonOffset: CGFloat = 0
+    @State private var slideWidth = UIScreen.main.bounds.size.width - 80
+    @State private var slideScale: CGFloat = 1
+    
+    @State private var isPulsing = false
+    
     var body: some View {
         ZStack{
             Color(.colorBlue).ignoresSafeArea(.all, edges: .all)
@@ -32,7 +38,7 @@ struct OnBoardingScreen: View {
                 }
                 
                 Spacer()
-
+                
                 BackgroundCircles(
                     imageName: "character-1"
                 )
@@ -42,6 +48,15 @@ struct OnBoardingScreen: View {
                 ZStack {
                     Capsule()
                         .foregroundStyle(.white.opacity(0.3))
+                        .scaleEffect(isPulsing ? 1.1 : 1)
+                        .onAppear {
+                            withAnimation(
+                                .easeOut(duration: 1.5)
+                                    .repeatForever(autoreverses: true)
+                            ) {
+                                isPulsing.toggle()
+                            }
+                        }
                     
                     Capsule()
                         .foregroundStyle(.white.opacity(0.3))
@@ -55,17 +70,14 @@ struct OnBoardingScreen: View {
                     
                     HStack{
                         Capsule()
-                            .foregroundStyle(.colorRed)
-                            .frame(width: 80)
+                            .fill(.colorRed)
+                            .frame(width: buttonOffset + 80)
                         
                         Spacer()
                     }
                     
-                    
-                    HStack{
+                    HStack {
                         ZStack{
-                            Circle()
-                                .foregroundStyle(.colorRed)
                             Circle()
                                 .foregroundStyle(.black.opacity(0.2))
                                 .padding(8)
@@ -74,17 +86,32 @@ struct OnBoardingScreen: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 24, weight: .bold))
                         }
-                        .onTapGesture {
-                            showingScreen = .HomeScreen
-                        }
-                        
+                        .offset(x: buttonOffset)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    if value.translation.width > 0 && buttonOffset <= slideWidth - 90 {
+                                        buttonOffset = value.translation.width
+                                        slideScale += 0.001
+                                    }
+                                }
+                            
+                                .onEnded({ endValue in
+                                    if buttonOffset <= slideWidth / 2 {
+                                        buttonOffset = 0
+                                        slideScale = 1
+                                    } else {
+                                        showingScreen = .HomeScreen
+                                    }
+                                })
+                        )
                         Spacer()
                     }
-
+                    
+                    
                 }
-                .frame(height: 80)
+                .frame(width: slideWidth, height: 80)
                 .padding()
-                
             }
             
         }
