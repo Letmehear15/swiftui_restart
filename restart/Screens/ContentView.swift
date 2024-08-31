@@ -11,15 +11,18 @@ struct ContentView: View {
     @AppStorage(EAppStorageName.ShowingScreen.rawValue) var showingScreen: EScreens = .HomeScreen
     
     var body: some View {
-        switch showingScreen {
-        case .HomeScreen:
-            HomeScreen()
-        case .OnboardingScreen:
-            OnBoardingScreen()
+        ZStack{
+            switch showingScreen {
+                case .HomeScreen:
+                    HomeScreen()
+                case .OnboardingScreen:
+                    OnBoardingScreen()
+            }
         }
+        .animation(.easeOut, value: showingScreen)
     }
 }
-    
-    #Preview {
-        ContentView()
-    }
+
+#Preview {
+    ContentView()
+}

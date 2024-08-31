@@ -14,13 +14,15 @@ struct OnBoardingScreen: View {
     @State private var slideWidth = UIScreen.main.bounds.size.width - 80
     @State private var slideScale: CGFloat = 1
     
+    @State private var isAnimating = false
+    
     @State private var isPulsing = false
     
     var body: some View {
         ZStack{
             Color(.colorBlue).ignoresSafeArea(.all, edges: .all)
             
-            VStack{
+            VStack(spacing: 10){
                 VStack{
                     Text("Share.")
                         .fontWeight(.heavy)
@@ -36,12 +38,21 @@ struct OnBoardingScreen: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                 }
+                .opacity(isAnimating ? 1 : 0)
+                .offset(y: isAnimating ? 0 : -40)
+                .animation(.easeOut(duration: 1), value: isAnimating)
                 
                 Spacer()
                 
-                BackgroundCircles(
-                    imageName: "character-1"
-                )
+                ZStack{
+                    BackgroundCircles()
+                    
+                    Image("character-1")
+                        .resizable()
+                        .scaledToFit()
+                        .opacity(isAnimating ? 1 : 0)
+                        .animation(.easeOut(duration: 0.3), value: isAnimating)
+                }
                 
                 Spacer()
                 
@@ -52,7 +63,7 @@ struct OnBoardingScreen: View {
                         .onAppear {
                             withAnimation(
                                 .easeOut(duration: 1.5)
-                                    .repeatForever(autoreverses: true)
+                                .repeatForever(autoreverses: true)
                             ) {
                                 isPulsing.toggle()
                             }
@@ -103,6 +114,7 @@ struct OnBoardingScreen: View {
                                     } else {
                                         showingScreen = .HomeScreen
                                     }
+                                    
                                 })
                         )
                         Spacer()
@@ -112,9 +124,16 @@ struct OnBoardingScreen: View {
                 }
                 .frame(width: slideWidth, height: 80)
                 .padding()
+                .opacity(isAnimating ? 1 : 0)
+                .offset(y: isAnimating ? 0 : 40)
+                .animation(.easeOut(duration: 1), value: isAnimating)
             }
             
         }
+        .onAppear(perform: {
+            isAnimating.toggle()
+        })
+        
     }
 }
 

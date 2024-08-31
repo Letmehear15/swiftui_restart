@@ -9,8 +9,9 @@ import SwiftUI
 
 struct BackgroundCircles: View {
     
-    @State var imageName: String
     @State var circlesColor: Color = .white
+    
+    @State private var isAnimating = false
     
     var body: some View {
         ZStack {
@@ -22,15 +23,16 @@ struct BackgroundCircles: View {
             Circle()
                 .stroke(circlesColor, lineWidth: 45)
                 .opacity(0.3)
-                .frame(width: 280)
-            
-            
-            Image(imageName)
-                .resizable()
-                .scaledToFit()
-            
+                .frame(width: 280)   
         }
-        .padding()
+        .opacity(isAnimating ? 1 : 0)
+        .blur(radius: isAnimating ? 0 : 10)
+        .scaleEffect(isAnimating ? 1 : 0.5)
+        .animation(.easeOut(duration: 1), value: isAnimating)
+        .onAppear(perform: {
+            isAnimating.toggle()
+        })
+    
     }
 }
 
@@ -38,6 +40,6 @@ struct BackgroundCircles: View {
     ZStack{
         Color(.colorBlue).ignoresSafeArea()
         
-        BackgroundCircles(imageName: "character-1", circlesColor: .colorGray)
+        BackgroundCircles(circlesColor: .colorGray)
     }
 }

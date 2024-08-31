@@ -13,7 +13,7 @@
 		E81FBC622C81D334000F833A /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81FBC612C81D334000F833A /* OnboardingScreen.swift */; };
 		E81FBC652C81D388000F833A /* ScreensEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81FBC642C81D388000F833A /* ScreensEnum.swift */; };
 		E81FBC672C81D9B4000F833A /* AppStorageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81FBC662C81D9B4000F833A /* AppStorageNames.swift */; };
-		E81FBC6B2C81EB3A000F833A /* BackgroundCirclesWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81FBC6A2C81EB3A000F833A /* BackgroundCirclesWithImage.swift */; };
+		E81FBC6B2C81EB3A000F833A /* BackgroundCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81FBC6A2C81EB3A000F833A /* BackgroundCircles.swift */; };
 		E83AE21D2C80ED5C00C8A03A /* restartApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83AE21C2C80ED5C00C8A03A /* restartApp.swift */; };
 		E83AE21F2C80ED5C00C8A03A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83AE21E2C80ED5C00C8A03A /* ContentView.swift */; };
 		E83AE2212C80ED5D00C8A03A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E83AE2202C80ED5D00C8A03A /* Assets.xcassets */; };
@@ -28,7 +28,7 @@
 		E81FBC642C81D388000F833A /* ScreensEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensEnum.swift; sourceTree = "<group>"; };
 		E81FBC662C81D9B4000F833A /* AppStorageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageNames.swift; sourceTree = "<group>"; };
 		E81FBC682C81DA48000F833A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		E81FBC6A2C81EB3A000F833A /* BackgroundCirclesWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCirclesWithImage.swift; sourceTree = "<group>"; };
+		E81FBC6A2C81EB3A000F833A /* BackgroundCircles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCircles.swift; sourceTree = "<group>"; };
 		E83AE2192C80ED5C00C8A03A /* restart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = restart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83AE21C2C80ED5C00C8A03A /* restartApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = restartApp.swift; sourceTree = "<group>"; };
 		E83AE21E2C80ED5C00C8A03A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 		E81FBC692C81EB18000F833A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E81FBC6A2C81EB3A000F833A /* BackgroundCirclesWithImage.swift */,
+				E81FBC6A2C81EB3A000F833A /* BackgroundCircles.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -208,7 +208,7 @@
 				E83AE21F2C80ED5C00C8A03A /* ContentView.swift in Sources */,
 				E83AE21D2C80ED5C00C8A03A /* restartApp.swift in Sources */,
 				E81FBC602C81D322000F833A /* HomeScreen.swift in Sources */,
-				E81FBC6B2C81EB3A000F833A /* BackgroundCirclesWithImage.swift in Sources */,
+				E81FBC6B2C81EB3A000F833A /* BackgroundCircles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +342,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"restart/Preview Content\"";
+				DEVELOPMENT_TEAM = 63D233FS34;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = restart/Info.plist;
@@ -375,6 +376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"restart/Preview Content\"";
+				DEVELOPMENT_TEAM = 63D233FS34;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = restart/Info.plist;
