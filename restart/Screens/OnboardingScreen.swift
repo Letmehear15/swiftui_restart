@@ -18,17 +18,23 @@ struct OnBoardingScreen: View {
     
     @State private var isPulsing = false
     
+    @State private var imageOffset: CGSize = .zero
+    
+    @State private var titleText = "Shared."
+    
     var body: some View {
         ZStack{
             Color(.colorBlue).ignoresSafeArea(.all, edges: .all)
             
             VStack(spacing: 10){
                 VStack{
-                    Text("Share.")
+                    Text(titleText)
                         .fontWeight(.heavy)
                         .font(.system(size: 60))
                         .foregroundStyle(.white)
                         .font(.largeTitle)
+                        .transition(.opacity)
+                        .id(titleText)
                     
                     Text("""
                          It's not how much we give
@@ -46,12 +52,44 @@ struct OnBoardingScreen: View {
                 
                 ZStack{
                     BackgroundCircles()
+                        .blur(radius: abs(imageOffset.width / 10))
+                        .offset(x: -imageOffset.width)
                     
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
                         .opacity(isAnimating ? 1 : 0)
                         .animation(.easeOut(duration: 0.3), value: isAnimating)
+                        .offset(x: imageOffset.width)
+                        .rotationEffect(.degrees(imageOffset.width / 20))
+                        .gesture (
+                            DragGesture()
+                                .onChanged({value in
+                                    withAnimation(.easeOut(duration: 0.5)){
+                                        if abs(imageOffset.width) <= 150 {
+                                            imageOffset = value.translation
+                                            titleText = "Give."
+                                        }
+                                    }
+                                })
+                            
+                                .onEnded{_ in
+                                    withAnimation(.easeOut(duration: 0.5)){
+                                        imageOffset = .zero
+                                        titleText = "Shared."
+                                    }
+                                    
+                                }
+                            
+                        )
+                        .overlay(alignment: .bottom, content: {
+                            Image(systemName: "arrow.left.and.right.circle")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .opacity(abs(imageOffset.width) > 10 ? 0 : 0.6)
+                                .animation(.easeOut.delay(0.3), value: imageOffset.width)
+                            }
+                        )
                 }
                 
                 Spacer()
