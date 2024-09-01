@@ -12,6 +12,8 @@ struct HomeScreen: View {
     
     @State private var isAnimation = false
     
+    let player = AudioPlayer()
+    
     var body: some View {
         VStack(spacing: 20){
             Spacer()
@@ -41,6 +43,7 @@ struct HomeScreen: View {
             Spacer()
             
             Button(action: {
+                player.playAudio(path: "success", type: "m4a")
                 showingScreen = .OnboardingScreen
             }) {
                 Label("Restart", systemImage: "arrow.2.circlepath.circle.fill")

@@ -11,16 +11,19 @@ struct OnBoardingScreen: View {
     @AppStorage(EAppStorageName.ShowingScreen.rawValue) var showingScreen: EScreens = .OnboardingScreen
     
     @State private var buttonOffset: CGFloat = 0
-    @State private var slideWidth = UIScreen.main.bounds.size.width - 80
     @State private var slideScale: CGFloat = 1
-    
-    @State private var isAnimating = false
-    
-    @State private var isPulsing = false
-    
+
+    @State private var slideWidth = UIScreen.main.bounds.size.width - 80
     @State private var imageOffset: CGSize = .zero
     
     @State private var titleText = "Shared."
+    
+    @State private var isAnimating = false
+    @State private var isPulsing = false
+    
+    private let hapticFeedback = UINotificationFeedbackGenerator()
+    
+    let player = AudioPlayer()
     
     var body: some View {
         ZStack{
@@ -147,9 +150,12 @@ struct OnBoardingScreen: View {
                             
                                 .onEnded({ endValue in
                                     if buttonOffset <= slideWidth / 2 {
+                                        hapticFeedback.notificationOccurred((.warning))
                                         buttonOffset = 0
                                         slideScale = 1
                                     } else {
+                                        hapticFeedback.notificationOccurred((.success))
+                                        player.playAudio(path: "chimeup", type: "mp3")
                                         showingScreen = .HomeScreen
                                     }
                                     
